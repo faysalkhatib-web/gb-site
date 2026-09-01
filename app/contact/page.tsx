@@ -33,7 +33,7 @@ export default function ContactPage() {
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-tint text-blue">
                 <MailIcon className="h-5 w-5" />
               </span>
-              <p className="mt-6 font-display text-2xl text-ink">General inquiries</p>
+              <p className="mt-6 font-display text-2xl font-extrabold uppercase text-ink">General inquiries</p>
               <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                 Press, partnerships, questions — anything that isn&rsquo;t a demo.
               </p>
@@ -50,7 +50,7 @@ export default function ContactPage() {
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-tint text-orange-deep">
                 <SpotifyIcon className="h-5 w-5" />
               </span>
-              <p className="mt-6 font-display text-2xl text-ink">Submit a demo</p>
+              <p className="mt-6 font-display text-2xl font-extrabold uppercase text-ink">Submit a demo</p>
               <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                 We listen to everything that comes in. Here&rsquo;s what helps:
               </p>
@@ -74,7 +74,7 @@ export default function ContactPage() {
         <Reveal delay={0.15} className="mx-auto mt-6 max-w-content px-6 sm:px-10">
           <div className="flex flex-col items-center gap-6 rounded-[1.75rem] bg-ink px-8 py-10 text-center text-cream sm:flex-row sm:justify-between sm:text-left">
             <div>
-              <p className="font-display text-xl">Find us elsewhere</p>
+              <p className="font-display text-xl font-extrabold uppercase">Find us elsewhere</p>
               <p className="mt-1 text-sm text-cream/70">{site.address}</p>
             </div>
             <div className="flex items-center gap-4">

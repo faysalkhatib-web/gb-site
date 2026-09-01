@@ -39,7 +39,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-content items-center gap-14 px-6 sm:px-10 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue">How it started</p>
-            <h2 className="mt-4 font-display text-3xl leading-tight text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-tight text-ink sm:text-4xl">
               A few friends, a shared drive full of rough mixes
             </h2>
             <div className="mt-6 space-y-5 text-base leading-relaxed text-ink-soft">
@@ -88,7 +88,7 @@ export default function AboutPage() {
             {values.map((value, i) => (
               <Reveal key={value.title} delay={i * 0.1}>
                 <div className="group h-full rounded-2xl border border-ink/10 bg-cream p-7 transition-all duration-500 ease-premium hover:-translate-y-1.5 hover:border-blue/30 hover:shadow-soft">
-                  <p className="font-display text-lg text-ink">{value.title}</p>
+                  <p className="font-display text-lg font-extrabold uppercase text-ink">{value.title}</p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">{value.copy}</p>
                 </div>
               </Reveal>
@@ -100,7 +100,7 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-content px-6 text-center sm:px-10">
           <Reveal>
-            <p className="font-display text-3xl text-ink sm:text-4xl">Want in?</p>
+            <p className="font-display text-3xl font-black uppercase text-ink sm:text-4xl">Want in?</p>
             <p className="mx-auto mt-4 max-w-md text-base text-ink-soft">
               We&rsquo;re always listening for the next addition to the family. Reach out — we read
               everything.

@@ -26,8 +26,8 @@ export function PageHero({
       />
       <div className="relative mx-auto max-w-content px-6 sm:px-10">
         <Reveal>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-blue">{kicker}</p>
-          <h1 className="max-w-3xl font-display text-5xl leading-[1.05] text-ink sm:text-6xl lg:text-7xl">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-blue">{kicker}</p>
+          <h1 className="max-w-3xl font-display text-5xl font-black uppercase leading-[0.95] text-ink sm:text-6xl lg:text-7xl">
             {title}
           </h1>
           {copy && <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{copy}</p>}

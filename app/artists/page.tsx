@@ -31,7 +31,9 @@ export default function ArtistsPage() {
       </section>
       <section className="bg-cream-deep/40 py-20">
         <div className="mx-auto max-w-content px-6 text-center sm:px-10">
-          <p className="font-display text-3xl text-ink sm:text-4xl">Think you&rsquo;d fit in?</p>
+          <p className="font-display text-3xl font-black uppercase text-ink sm:text-4xl">
+            Think you&rsquo;d fit in?
+          </p>
           <p className="mx-auto mt-4 max-w-md text-base text-ink-soft">
             We&rsquo;re always listening. Send us your music and tell us a bit about you.
           </p>

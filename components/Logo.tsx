@@ -15,9 +15,9 @@ export function Logo({ className = "", dark = false }: { className?: string; dar
       >
         <PawMark className="h-[18px] w-[18px]" />
       </span>
-      <span className={`font-display text-lg leading-none ${dark ? "text-cream" : "text-ink"}`}>
+      <span className={`font-display text-lg font-black uppercase leading-none ${dark ? "text-cream" : "text-ink"}`}>
         Good Boy
-        <span className="ml-1.5 align-middle text-[0.6rem] font-sans font-semibold uppercase tracking-[0.24em] text-orange-deep">
+        <span className="ml-1.5 align-middle text-[0.6rem] font-bold uppercase tracking-[0.24em] text-orange-deep">
           Records
         </span>
       </span>

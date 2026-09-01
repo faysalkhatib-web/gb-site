@@ -63,15 +63,18 @@ export default function MerchPage() {
                   href={`${site.shopifyUrl}/collections/${collection.handle}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative block aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-soft transition-shadow duration-500 ease-premium hover:shadow-lift"
+                  data-cursor="SHOP"
+                  className="group relative block aspect-[4/3] overflow-hidden shadow-soft transition-shadow duration-500 ease-premium hover:shadow-lift"
                 >
                   <div className="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
                     <ArtistArt seed={collection.seed} />
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                    <p className="font-display text-2xl text-cream sm:text-3xl">{collection.name}</p>
+                    <p className="font-display text-2xl font-extrabold uppercase text-cream sm:text-3xl">
+                      {collection.name}
+                    </p>
                     <p className="mt-2 max-w-xs text-sm leading-relaxed text-cream/75">{collection.copy}</p>
-                    <p className="mt-4 flex translate-y-1 items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream opacity-0 transition-all duration-400 ease-premium group-hover:translate-y-0 group-hover:opacity-100">
+                    <p className="mt-4 flex translate-y-1 items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-cream opacity-0 transition-all duration-400 ease-premium group-hover:translate-y-0 group-hover:opacity-100">
                       Shop now <span aria-hidden="true">↗</span>
                     </p>
                   </div>
@@ -85,7 +88,7 @@ export default function MerchPage() {
       <section className="bg-blue py-20 text-cream sm:py-24">
         <div className="mx-auto max-w-content px-6 text-center sm:px-10">
           <Reveal>
-            <p className="font-display text-3xl italic sm:text-4xl">
+            <p className="font-display text-3xl font-black uppercase sm:text-4xl">
               New drops don&rsquo;t last long around here.
             </p>
             <p className="mx-auto mt-4 max-w-md text-sm text-cream/75">

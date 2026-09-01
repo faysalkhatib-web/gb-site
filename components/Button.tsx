@@ -4,13 +4,14 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowIcon } from "./icons";
 
-type Variant = "primary" | "secondary" | "soft" | "ghost";
+type Variant = "primary" | "secondary" | "soft" | "ghost" | "outline-light";
 
 const variantClasses: Record<Variant, string> = {
   primary: "bg-blue text-cream hover:bg-blue-dark shadow-soft hover:shadow-lift",
   secondary: "border border-blue/30 text-blue hover:border-blue hover:bg-blue hover:text-cream",
   soft: "bg-orange text-ink hover:bg-orange-deep shadow-soft hover:shadow-lift",
   ghost: "text-ink hover:text-blue px-0 py-0",
+  "outline-light": "border border-cream/40 text-cream hover:bg-cream hover:text-blue",
 };
 
 type CommonProps = {
@@ -39,8 +40,8 @@ export function Button(props: LinkProps | ButtonElProps) {
   const isGhost = variant === "ghost";
 
   const base = isGhost
-    ? "group inline-flex items-center gap-2 text-sm font-semibold tracking-wide transition-colors duration-300 ease-premium"
-    : "group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 ease-premium hover:-translate-y-0.5";
+    ? "group inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 ease-premium"
+    : "group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 ease-premium hover:-translate-y-0.5";
 
   const classes = `${base} ${variantClasses[variant]} ${className}`;
 

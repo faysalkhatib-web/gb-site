@@ -11,13 +11,13 @@ export function ArtistCard({ artist, className = "" }: { artist: Artist; classNa
 
   return (
     <div className={`group relative ${className}`}>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-soft transition-shadow duration-500 ease-premium group-hover:shadow-lift">
+      <div className="relative aspect-[4/5] overflow-hidden shadow-soft transition-shadow duration-500 ease-premium group-hover:shadow-lift">
         <div className="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.08]">
           <ArtistArt seed={artist.seed} />
         </div>
 
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-          <p className="font-display text-xl text-cream sm:text-2xl">{artist.name}</p>
+          <p className="font-display text-xl font-extrabold uppercase text-cream sm:text-2xl">{artist.name}</p>
           <p className="mt-1 text-xs uppercase tracking-[0.18em] text-cream/70">{artist.genre}</p>
           <p className="mt-3 flex translate-y-1 items-center gap-1.5 text-xs font-medium text-cream opacity-0 transition-all duration-400 ease-premium group-hover:translate-y-0 group-hover:opacity-100">
             {primaryIsSpotify ? (
@@ -34,6 +34,7 @@ export function ArtistCard({ artist, className = "" }: { artist: Artist; classNa
           href={primaryUrl}
           target="_blank"
           rel="noopener noreferrer"
+          data-cursor={primaryIsSpotify ? "LISTEN" : "FOLLOW"}
           className="absolute inset-0"
           aria-label={`${artist.name} on ${primaryIsSpotify ? "Spotify" : "Instagram"}`}
         />

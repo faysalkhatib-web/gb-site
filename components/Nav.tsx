@@ -5,9 +5,32 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "./Logo";
-import { merchNav, primaryNav, site } from "@/data/site";
+import { merchNav, primaryNav, site, type NavLink } from "@/data/site";
 import { CloseIcon, InstagramIcon, MenuIcon, PlusIcon, SpotifyIcon } from "./icons";
 import { NewsletterForm } from "./NewsletterForm";
+import { ScrambleText } from "./ScrambleText";
+
+function DesktopNavLink({ link, active }: { link: NavLink; active: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href={link.href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      data-cursor="GO"
+      className={`group relative py-1 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+        active ? "text-blue" : "text-ink/80 hover:text-ink"
+      }`}
+    >
+      <ScrambleText text={link.label} active={hovered} />
+      <span
+        className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-blue transition-transform duration-300 ease-premium ${
+          active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+        }`}
+      />
+    </Link>
+  );
+}
 
 export function Nav() {
   const pathname = usePathname();
@@ -54,33 +77,17 @@ export function Nav() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 transition-all duration-500 ease-premium ${
-          scrolled ? "bg-cream/90 shadow-soft backdrop-blur-md" : "bg-cream/60 backdrop-blur-sm"
+        className={`sticky top-0 z-50 bg-cream transition-shadow duration-500 ease-premium ${
+          scrolled ? "shadow-soft" : ""
         }`}
       >
         <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 sm:px-10">
           <Logo />
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {primaryNav.map((link) => {
-              const active = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`group relative py-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
-                    active ? "text-blue" : "text-ink/80 hover:text-ink"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-blue transition-transform duration-300 ease-premium ${
-                      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
+            {primaryNav.map((link) => (
+              <DesktopNavLink key={link.href} link={link} active={pathname === link.href} />
+            ))}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -89,6 +96,7 @@ export function Nav() {
                 type="button"
                 aria-expanded={panelOpen}
                 aria-label={panelOpen ? "Close quick menu" : "Open quick menu"}
+                data-cursor={panelOpen ? undefined : "MORE"}
                 onClick={() => setPanelOpen((v) => !v)}
                 className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-soft ${
                   panelOpen ? "bg-ink text-cream" : "bg-blue text-cream hover:bg-blue-dark"
@@ -104,12 +112,12 @@ export function Nav() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.97 }}
                     transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute right-0 top-full mt-3 w-80 rounded-3xl border border-ink/10 bg-cream p-6 shadow-lift"
+                    className="absolute right-0 top-full mt-3 w-80 border border-ink/10 bg-cream p-6 shadow-lift"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink/50">Good Boy Shop</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Good Boy Shop</p>
                     <Link
                       href={merchNav.href}
-                      className="group mt-3 flex items-center justify-between rounded-2xl bg-orange px-5 py-4 text-sm font-semibold text-ink transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:bg-orange-deep"
+                      className="group mt-3 flex items-center justify-between bg-orange px-5 py-4 text-sm font-bold uppercase tracking-wide text-ink transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:bg-orange-deep"
                     >
                       {merchNav.label}
                       <span aria-hidden="true" className="transition-transform duration-300 ease-premium group-hover:translate-x-1">
@@ -118,7 +126,7 @@ export function Nav() {
                     </Link>
 
                     <div className="mt-6 border-t border-ink/10 pt-6">
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink/50">Stay in the loop</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Stay in the loop</p>
                       <p className="mt-2 text-sm text-ink-soft">Releases and drops, straight to your inbox.</p>
                       <div className="mt-4">
                         <NewsletterForm />
@@ -162,7 +170,7 @@ export function Nav() {
                 >
                   <Link
                     href={link.href}
-                    className="block border-b border-ink/10 py-5 font-display text-3xl text-ink transition-colors duration-300 hover:text-blue"
+                    className="block border-b border-ink/10 py-5 font-display text-3xl font-extrabold uppercase text-ink transition-colors duration-300 hover:text-blue"
                   >
                     {link.label}
                   </Link>
@@ -170,8 +178,8 @@ export function Nav() {
               ))}
             </nav>
 
-            <div className="mt-10 rounded-3xl bg-blue-tint p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">Stay in the loop</p>
+            <div className="mt-10 bg-blue-tint p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue">Stay in the loop</p>
               <p className="mt-2 text-sm text-ink-soft">Releases and drops, straight to your inbox.</p>
               <div className="mt-4">
                 <NewsletterForm />

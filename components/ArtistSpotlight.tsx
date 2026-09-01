@@ -28,6 +28,13 @@ export function ArtistSpotlight({ artist, index }: { artist: Artist; index: numb
           <ArtistArt seed={artist.seed} scrim={false} animated />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-transparent sm:hidden" />
+        <span
+          className="pointer-events-none absolute -left-4 -top-10 select-none font-display text-[9rem] font-black leading-none text-transparent sm:text-[11rem]"
+          style={{ WebkitTextStroke: "2px rgba(255,251,244,0.5)" }}
+          aria-hidden="true"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
       <div
@@ -35,10 +42,10 @@ export function ArtistSpotlight({ artist, index }: { artist: Artist; index: numb
           reversed ? "sm:order-1" : "sm:order-2"
         }`}
       >
-        <span className="font-display text-sm italic text-blue">
-          {String(index + 1).padStart(2, "0")} — {artist.genre}
+        <span className="inline-flex w-fit items-center gap-2 bg-blue-tint px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue">
+          {artist.genre}
         </span>
-        <h3 className="mt-3 font-display text-6xl leading-[0.92] text-ink sm:text-7xl lg:text-8xl">
+        <h3 className="mt-4 font-display text-6xl font-extrabold uppercase leading-[0.88] text-ink sm:text-7xl lg:text-8xl">
           {artist.name}
         </h3>
         <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">{artist.bio}</p>
@@ -49,7 +56,8 @@ export function ArtistSpotlight({ artist, index }: { artist: Artist; index: numb
               href={primaryUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:bg-blue"
+              data-cursor={primaryIsSpotify ? "LISTEN" : "FOLLOW"}
+              className="group inline-flex items-center gap-2 bg-ink px-6 py-3 text-sm font-bold uppercase tracking-wide text-cream transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:bg-blue"
             >
               {primaryIsSpotify ? <SpotifyIcon className="h-4 w-4" /> : <InstagramIcon className="h-4 w-4" />}
               {primaryIsSpotify ? "Listen on Spotify" : "Follow on Instagram"}
@@ -60,8 +68,9 @@ export function ArtistSpotlight({ artist, index }: { artist: Artist; index: numb
               href={secondaryUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="FOLLOW"
               aria-label={`${artist.name} on Instagram`}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-blue hover:text-blue"
+              className="flex h-11 w-11 items-center justify-center border border-ink/15 text-ink transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-blue hover:text-blue"
             >
               <InstagramIcon className="h-4 w-4" />
             </a>
