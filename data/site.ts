@@ -34,8 +34,9 @@ export type NavLink = {
 export const primaryNav: NavLink[] = [
   { label: "Artists", href: "/artists" },
   { label: "Music", href: "/music" },
+  { label: "Merch", href: "/merch" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const merchNav: NavLink = { label: "Merch", href: "/merch" };
+export const merchNav: NavLink = { label: "Shop the merch", href: "/merch" };

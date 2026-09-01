@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { merchNav, primaryNav, site } from "@/data/site";
+import { primaryNav, site } from "@/data/site";
 import { InstagramIcon, MailIcon, SpotifyIcon, TikTokIcon } from "./icons";
 import { NewsletterForm } from "./NewsletterForm";
 
@@ -46,7 +46,7 @@ export function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream/50">Explore</p>
             <ul className="mt-5 space-y-3">
-              {[...primaryNav, merchNav].map((link) => (
+              {primaryNav.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

@@ -1,13 +1,19 @@
 import { ArtistGallery } from "@/components/ArtistGallery";
 import { ArtistArt } from "@/components/ArtistArt";
+import { ArtistSpotlight } from "@/components/ArtistSpotlight";
 import { Button } from "@/components/Button";
-import { NewsletterForm } from "@/components/NewsletterForm";
+import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import { ReleaseCard } from "@/components/ReleaseCard";
 import { SectionHeading } from "@/components/SectionHeading";
-import { artists } from "@/data/artists";
+import { artists, featuredArtists } from "@/data/artists";
 import { featuredReleases } from "@/data/releases";
 import { site } from "@/data/site";
+
+const tickerItems = [
+  `${site.shortName} Records`,
+  ...Array.from(new Set(artists.map((a) => a.genre))),
+];
 
 const pillars = [
   {
@@ -18,7 +24,7 @@ const pillars = [
   {
     number: "02",
     title: "A real community",
-    copy: "Our artists share stages, playlists, and each other's fans — not just a logo on a page.",
+    copy: "Our artists get on each other's releases, trade fans, and show up to each other's shows.",
   },
   {
     number: "03",
@@ -30,30 +36,30 @@ const pillars = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden pb-16 pt-24 sm:pt-32">
-        <div
-          className="pointer-events-none absolute -right-40 -top-32 h-[28rem] w-[28rem] rounded-full opacity-70 blur-3xl"
-          style={{ background: "radial-gradient(circle, #F4D68E 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -left-40 top-64 h-96 w-96 rounded-full opacity-40 blur-3xl"
-          style={{ background: "radial-gradient(circle, #2955A6 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
+      <section className="relative overflow-hidden pt-24 sm:pt-32">
         <div className="relative mx-auto max-w-content px-6 sm:px-10">
-          <Reveal>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-blue">
-              Independent Record Label
-            </p>
-            <h1 className="max-w-3xl font-display text-6xl leading-[1.02] text-ink sm:text-7xl lg:text-8xl">
-              Good songs.
-              <br /> Good people.
-              <br />
-              <span className="italic text-blue">Good boy.</span>
-            </h1>
-            <p className="mt-7 max-w-lg text-lg leading-relaxed text-ink-soft">{site.description}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-blue">
+            Independent Record Label
+          </p>
+          <h1 className="font-display leading-[0.86] text-ink">
+            <span className="block text-7xl sm:text-8xl lg:text-[8.5rem]">Good songs.</span>
+            <span className="block text-7xl sm:text-8xl lg:text-[8.5rem]">Good people.</span>
+            <span className="relative mt-1 flex items-center">
+              <span
+                className="relative z-10 block text-7xl italic text-transparent sm:text-8xl lg:text-[8.5rem]"
+                style={{ WebkitTextStroke: "1.5px #2955A6" }}
+              >
+                Good boy.
+              </span>
+              <span className="relative -ml-6 hidden h-32 w-32 shrink-0 overflow-hidden rounded-full shadow-lift sm:block lg:-ml-10 lg:h-44 lg:w-44">
+                <ArtistArt seed={71} scrim={false} animated />
+              </span>
+            </span>
+          </h1>
+
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-8 sm:mt-14">
+            <p className="max-w-md text-lg leading-relaxed text-ink-soft">{site.description}</p>
+            <div className="flex flex-wrap gap-4">
               <Button href="#artists" variant="primary" arrow>
                 Meet the roster
               </Button>
@@ -61,31 +67,40 @@ export default function HomePage() {
                 Shop merch
               </Button>
             </div>
-          </Reveal>
-        </div>
-        <div className="relative mx-auto mt-24 flex max-w-content justify-center px-6 sm:px-10">
-          <div className="flex flex-col items-center gap-2 text-ink/40">
-            <span className="text-[0.65rem] font-semibold uppercase tracking-[0.3em]">Scroll</span>
-            <span className="h-8 w-px animate-bounce bg-ink/30" />
           </div>
+        </div>
+
+        <div className="mt-16 border-y border-ink/10 bg-ink py-4 text-cream sm:mt-20">
+          <Marquee items={tickerItems} textClassName="font-display text-2xl italic sm:text-3xl" />
         </div>
       </section>
 
-      <section id="artists" className="scroll-mt-24 bg-cream py-16 sm:py-24">
+      <section id="artists" className="scroll-mt-24 bg-cream">
+        {featuredArtists.map((artist, i) => (
+          <ArtistSpotlight key={artist.slug} artist={artist} index={i} />
+        ))}
+      </section>
+
+      <div className="bg-orange py-4 text-ink">
+        <Marquee
+          items={["Community over competition", "Independent & artist-first", "Good Boy Records"]}
+          textClassName="font-display text-xl sm:text-2xl"
+        />
+      </div>
+
+      <section className="bg-cream py-20 sm:py-28">
         <div className="mx-auto max-w-content px-6 sm:px-10">
-          <Reveal>
-            <SectionHeading
-              kicker="The Roster"
-              title="Artists on the label"
-              copy="A small, deliberately-curated roster — every one of them a phone call away. Tap through to hear the songs or follow along."
-            >
-              <Button href="/artists" variant="ghost" arrow>
-                View all artists
-              </Button>
-            </SectionHeading>
-          </Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue">Full Roster</p>
+              <h2 className="mt-3 font-display text-4xl text-ink sm:text-5xl">Browse everyone</h2>
+            </div>
+            <Button href="/artists" variant="ghost" arrow>
+              View all artists
+            </Button>
+          </div>
         </div>
-        <div className="mt-14">
+        <div className="mt-12">
           <ArtistGallery artists={artists} />
         </div>
       </section>
@@ -166,28 +181,11 @@ export default function HomePage() {
           <Reveal delay={0.15}>
             <div className="grid grid-cols-2 gap-4">
               <div className="group relative aspect-[3/4] translate-y-6 overflow-hidden rounded-2xl shadow-lift transition-transform duration-500 ease-premium hover:-translate-y-1">
-                <ArtistArt seed={71} scrim={false} />
+                <ArtistArt seed={19} scrim={false} animated />
               </div>
               <div className="group relative aspect-[3/4] -translate-y-6 overflow-hidden rounded-2xl shadow-lift transition-transform duration-500 ease-premium hover:-translate-y-1">
-                <ArtistArt seed={19} scrim={false} />
+                <ArtistArt seed={44} scrim={false} animated />
               </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-cream py-20 sm:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center sm:px-10">
-          <Reveal>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-blue">Join the Family</p>
-            <h2 className="font-display text-4xl leading-[1.05] text-ink sm:text-5xl">
-              Get the good stuff first
-            </h2>
-            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-ink-soft">
-              New releases, merch drops, and the occasional living-room show — straight to your inbox.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <NewsletterForm />
             </div>
           </Reveal>
         </div>

@@ -43,9 +43,14 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        drift: {
+          "0%, 100%": { transform: "scale(1) translate(0, 0)" },
+          "50%": { transform: "scale(1.12) translate(-2%, 2%)" },
+        },
       },
       animation: {
-        marquee: "marquee 28s linear infinite",
+        marquee: "marquee 26s linear infinite",
+        drift: "drift 16s ease-in-out infinite",
       },
     },
   },
